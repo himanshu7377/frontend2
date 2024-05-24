@@ -1,23 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
-
+import React from 'react';
+import Login from './components/Login';
+import Register from './components/Register';
+import Home from './components/Home';
+import CreatePost from './components/Post';
+import UserProfile from './components/UserProfile.jsx';
+import { ToastContainer } from 'react-toastify';
+import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
+import { UserProvider } from './UserContext.js'; // Import UserProvider
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <UserProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/post" element={<CreatePost />} />
+          <Route path="/profile/:userId" element={<UserProfile />} />
+        </Routes>
+        <ToastContainer />
+        </UserProvider>
+      </BrowserRouter>
+   
     </div>
   );
 }
